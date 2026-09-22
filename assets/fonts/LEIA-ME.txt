@@ -1,0 +1,2 @@
+Coloque aqui o arquivo da fonte Panton Bold com um destes nomes:
+Panton-Bold.woff2 (preferível), Panton-Bold.woff, Panton-Bold.otf ou Panton-Bold.ttf

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#19A687">
+  <title>Mudança de Sede | TODOS Empreendimentos</title>
+
+  <!-- Fontes opcionais: se o Google Fonts estiver bloqueado, o layout usa as fontes do sistema -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="brand-stripe" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+  <div class="deco-layer" aria-hidden="true"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="deco deco-3"></span></div>
+
+  <div class="test-badge" id="test-badge" hidden>MODO TESTE · <span id="test-badge-time"></span></div>
+
+  <main class="page">
+
+    <!-- ========== CABEÇALHO ========== -->
+    <header class="hero">
+      <figure class="hero-photo">
+        <picture>
+          <source media="(max-width: 959px)" srcset="assets/sede-todos-mobile.jpg" width="706" height="530">
+          <img src="assets/sede-todos.jpg" width="596" height="980"
+               alt="Fachada da sede da TODOS Empreendimentos, com o letreiro da empresa e uma palmeira em frente">
+        </picture>
+      </figure>
+
+      <div class="hero-content">
+        <div class="brand-logos">
+          <img src="assets/logo-todos.png" class="logo-todos" width="720" height="260" alt="TODOS Empreendimentos">
+          <span class="logo-divider" aria-hidden="true"></span>
+          <img src="assets/logo-pessoas-cultura.png" class="logo-pc" width="720" height="226" alt="Pessoas e Cultura">
+        </div>
+
+        <h1 class="title">
+          <span class="title-main">Mudança de Sede</span><span class="visually-hidden"> | </span>
+          <span class="title-sub">TODOS Empreendimentos</span>
+        </h1>
+        <p class="subtitle">Queremos ouvir você e o seu time.</p>
+        <span class="title-accent" aria-hidden="true"></span>
+
+        <div class="intro">
+          <p>Estamos vivendo um importante movimento de mudança de sede de <strong>Ipatinga</strong> para <strong>Ribeirão Preto</strong>, que envolve diferentes dimensões para a TODOS e, principalmente, para as pessoas.</p>
+          <p>Sabemos que processos de mudança naturalmente geram dúvidas, expectativas e necessidades de esclarecimento. Por isso, queremos abrir este espaço para que você, enquanto líder, registre as principais dúvidas que você e/ou seu time têm sobre o processo de mudança.</p>
+          <p>As contribuições serão consolidadas pelo time de Pessoas e Cultura e levadas pelo VP Tales, para que possamos endereçar os principais pontos e dar mais clareza e segurança às pessoas ao longo desse processo.</p>
+          <p>Sua participação é importante para que possamos construir uma comunicação cada vez mais transparente, próxima e responsável durante essa transição.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== CRONÔMETRO ========== -->
+    <section class="timer-card" id="timer-card" data-state="loading" aria-labelledby="timer-heading">
+      <div class="timer-info">
+        <svg class="timer-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <path d="M24 13v11l7 5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h2 id="timer-heading" class="timer-label">Formulário aberto até</h2>
+          <p class="timer-deadline">18h00 de 24/09/2026</p>
+        </div>
+      </div>
+
+      <div class="timer-status" aria-live="polite">
+        <!-- Contagem regressiva (durante o período) -->
+        <div class="countdown" id="countdown" hidden>
+          <p class="countdown-title">Tempo restante</p>
+          <div class="countdown-boxes" role="timer" aria-label="Tempo restante" id="countdown-boxes">
+            <div class="cd-box"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">horas</span></div>
+            <span class="cd-colon" aria-hidden="true">:</span>
+            <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">minutos</span></div>
+            <span class="cd-colon" aria-hidden="true">:</span>
+            <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">segundos</span></div>
+          </div>
+        </div>
+        <!-- Mensagens de estado (antes / encerrado / carregando) -->
+        <p class="timer-message" id="timer-message">Sincronizando horário…</p>
+      </div>
+    </section>
+
+    <!-- ========== FORMULÁRIO ========== -->
+    <section class="form-card" id="form-card" aria-label="Formulário de dúvidas">
+
+      <!-- Aviso de formulário fechado (antes do início ou após o encerramento) -->
+      <div class="closed-notice" id="closed-notice" role="status" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div>
+          <p class="closed-title" id="closed-title"></p>
+          <p class="closed-text" id="closed-text"></p>
+        </div>
+      </div>
+
+      <form id="duvidas-form" novalidate>
+        <!-- Passo 1 -->
+        <div class="step">
+          <span class="step-num" aria-hidden="true">1</span>
+          <div class="step-body">
+            <h2 class="step-title" id="q1-title">Quem está respondendo?</h2>
+            <label class="field-label" for="lider">Selecione seu nome</label>
+            <div class="select-wrap">
+              <select id="lider" name="lider" required aria-describedby="lider-error email-display">
+                <option value="">Selecione seu nome</option>
+              </select>
+            </div>
+            <p class="field-error" id="lider-error" role="alert" hidden></p>
+            <p class="email-display" id="email-display" aria-live="polite" hidden>
+              E-mail corporativo: <strong id="email-value"></strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step">
+          <span class="step-num" aria-hidden="true">2</span>
+          <div class="step-body">
+            <h2 class="step-title" id="q2-title">Quais são as principais dúvidas que você e/ou seu time têm sobre o processo de mudança da sede de Ipatinga para Ribeirão Preto?</h2>
+            <p class="step-help" id="q2-help">Você pode registrar quantas dúvidas considerar necessárias.</p>
+          </div>
+        </div>
+
+        <div class="duvidas-list" id="duvidas-list" aria-describedby="q2-help"></div>
+        <p class="field-error field-error--block" id="duvidas-error" role="alert" hidden></p>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" id="add-duvida">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Adicionar outra dúvida
+          </button>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span class="btn-label">Enviar respostas</span>
+          </button>
+        </div>
+        <p class="submit-error" id="submit-error" role="alert" hidden></p>
+      </form>
+
+      <!-- Confirmação -->
+      <div class="confirmation" id="confirmation" hidden tabindex="-1">
+        <div class="confirmation-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2 class="confirmation-title">Contribuição registrada.</h2>
+        <p class="confirmation-text">Você pode enviar novas dúvidas novamente ao longo do dia.</p>
+        <button type="button" class="btn btn-primary" id="new-submission">Enviar novas dúvidas</button>
+      </div>
+    </section>
+
+    <!-- ========== RODAPÉ ========== -->
+    <footer class="footer">
+      <div class="brand-logos brand-logos--footer">
+        <img src="assets/logo-todos.png" class="logo-todos" width="720" height="260" alt="TODOS Empreendimentos" loading="lazy">
+        <span class="logo-divider" aria-hidden="true"></span>
+        <img src="assets/logo-pessoas-cultura.png" class="logo-pc" width="720" height="226" alt="Pessoas e Cultura" loading="lazy">
+      </div>
+    </footer>
+  </main>
+
+  <div class="brand-stripe brand-stripe--bottom" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+  <!-- Modelo de um bloco de dúvida (clonado pelo script.js) -->
+  <template id="duvida-template">
+    <div class="duvida-item">
+      <div class="duvida-head">
+        <label class="duvida-label"></label>
+        <button type="button" class="btn-remove">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2c.1 1 .9 1.8 1.9 1.8h5.4c1 0 1.8-.8 1.9-1.8L17.5 7M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="btn-remove-text">Remover</span>
+        </button>
+      </div>
+      <textarea class="duvida-input" rows="4" placeholder="Descreva sua dúvida aqui…"></textarea>
+      <p class="char-count" aria-hidden="true"></p>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
