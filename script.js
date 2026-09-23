@@ -9,10 +9,8 @@
      1. CONFIGURAÇÃO — o que normalmente precisará ser editado
      --------------------------------------------------------- */
   const CONFIG = {
-    // Janela de abertura em UTC. Brasília = UTC-3 (sem horário de verão desde 2019).
-    // 24/09/2026 00:00 BRT  →  24/09/2026 03:00 UTC
-    // 24/09/2026 18:00 BRT  →  24/09/2026 21:00 UTC
-    inicioUTC: Date.UTC(2026, 8, 24, 3, 0, 0),   // mês 8 = setembro (0-based)
+    // Formulário aberto desde já, sem data de início. Encerramento em UTC
+    // (Brasília = UTC-3): 24/09/2026 18:00 BRT → 24/09/2026 21:00 UTC. Mês 8 = setembro.
     fimUTC:    Date.UTC(2026, 8, 24, 21, 0, 0),
     offsetBrasilia: "-03:00",
 
@@ -99,7 +97,7 @@
   function estadoJanela(ms) {
     if (ms >= CONFIG.fimUTC) return "closed";
     return "open";
-   }
+  }
 
   /* ---------------------------------------------------------
      4. ELEMENTOS
@@ -314,7 +312,7 @@
       quantidadeDuvidas: duvidas.length,
       origem: CONFIG.origem,
       versao: CONFIG.versaoFormulario,
-      modoTeste: false
+      modoTeste: simulado ? "Yes" : "No"
     };
   }
 
@@ -449,10 +447,7 @@
 
     el.countdown.hidden = estado !== "open";
 
-    if (estado === "before") {
-      el.timerMessage.textContent = "Formulário disponível em 24/09.";
-      bloquearFormulario("Formulário disponível em 24/09.", "");
-    } else if (estado === "closed") {
+    if (estado === "closed") {
       el.timerMessage.textContent = "Formulário encerrado";
       bloquearFormulario("Formulário encerrado",
         "O prazo para envio das contribuições foi encerrado às 18h00 de 24/09/2026.");
