@@ -97,10 +97,9 @@
   }
 
   function estadoJanela(ms) {
-    if (ms < CONFIG.inicioUTC) return "before";
     if (ms >= CONFIG.fimUTC) return "closed";
     return "open";
-  }
+   }
 
   /* ---------------------------------------------------------
      4. ELEMENTOS
