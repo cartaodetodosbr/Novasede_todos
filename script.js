@@ -315,7 +315,7 @@
       quantidadeDuvidas: duvidas.length,
       origem: CONFIG.origem,
       versao: CONFIG.versaoFormulario,
-      modoTeste: simulado ? "Yes" : "No"
+      modoTeste: false
     };
   }
 
