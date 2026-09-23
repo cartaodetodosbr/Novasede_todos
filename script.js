@@ -269,7 +269,7 @@
        "quantidadeDuvidas": 2,
        "origem": "HTML",
        "versao": "2.0",
-       "modoTeste": "No"
+       "modoTeste": false
      }
      Nenhum dado pessoal (nome, e-mail, matrícula, cargo, área, gestor) é coletado ou enviado.
      O envio só é concluído com HTTP 200 + JSON { "ok": true }.
@@ -312,7 +312,7 @@
       quantidadeDuvidas: duvidas.length,
       origem: CONFIG.origem,
       versao: CONFIG.versaoFormulario,
-      modoTeste: simulado ? "Yes" : "No"
+      modoTeste: false                     // Boolean, conforme o esquema do gatilho
     };
   }
 
@@ -350,7 +350,7 @@
 
     let corpo = null;
     try { corpo = JSON.parse(await resp.text()); } catch (_) { /* corpo não é JSON */ }
-    if (!corpo || corpo.ok !== true) throw new ErroEnvio("resposta", "HTTP 200 sem ok=true");
+    if (!corpo || (corpo.ok !== true && corpo.ok !== "true")) throw new ErroEnvio("resposta", "HTTP 200 sem ok=true");
   }
 
   function mensagemDeErro(err) {
