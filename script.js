@@ -32,68 +32,14 @@
     permitirSimulacao: true,
 
     origem: "HTML",
-    versaoFormulario: "1.1"
+    versaoFormulario: "2.0"
   };
 
   /* ---------------------------------------------------------
-     2. LÍDERES (nome | e-mail). A ordem alfabética é aplicada no código.
+     2. ANONIMATO
+     A coleta é anônima: este formulário não pede, não captura e não envia
+     nome, e-mail ou qualquer dado que identifique quem responde.
      --------------------------------------------------------- */
-  const LIDERES = [
-    ["Paloma Souza de Azevedo", "paloma.azevedo@maistodos.com.br"],
-    ["Aline de Goes Camargo", "alinecamargo@cartaodetodos.com"],
-    ["Amanda Miranda de Carvalho", "amandamiranda@cartaodetodos.com"],
-    ["Andressa Rodrigues Morato Maia", "andressarodrigues@cartaodetodos.com"],
-    ["Bráulio Piovezana Rinco", "brauliorinco@cartaodetodos.com"],
-    ["Brunna Karoline Queiroz Rodrigues", "brunnarodrigues@cartaodetodos.com"],
-    ["Caio Targino Rodrigues Simoes Brasileiro", "caiobrasileiro@cartaodetodos.com"],
-    ["Camila Da Silva Andrade", "camilaandrade@cartaodetodos.com"],
-    ["Caroline Paixão Vieira de Sena", "carolinedesena@cartaodetodos.com"],
-    ["Caterine Nunes Barbosa", "caterinebarbosa@cartaodetodos.com"],
-    ["Dan Sabbagh", "danilosabbagh@cartaodetodos.com"],
-    ["Denis Gabriel Abreu de Melo", "denisdemelo@cartaodetodos.com"],
-    ["Eduardo Henrique Vicentin", "eduardovicentin@cartaodetodos.com"],
-    ["Elisangela Pedro Rodrigues Oliveira", "elisangelaoliveira@cartaodetodos.com"],
-    ["Elison Glauber de Castro", "elisoncastro@cartaodetodos.com"],
-    ["Guilherme Oliveira Sousa", "guilhermesousa@cartaodetodos.com"],
-    ["Jézi Fernando Oliveira", "jezioliveira@cartaodetodos.com"],
-    ["Kettuly Fernanda Alves de Amorim Santiago", "kettulysantiago@cartaodetodos.com"],
-    ["Leon Calixto", "leoncalixto@cartaodetodos.com"],
-    ["Lorrayne Theza", "lorraynetheza@cartaodetodos.com"],
-    ["Lucas Bicalho de Freitas", "lucasfreitas@cartaodetodos.com"],
-    ["Lucas Henrique Bento Barreto", "lucasbarreto@cartaodetodos.com"],
-    ["Luciana Alves Faria", "lucianafaria@cartaodetodos.com"],
-    ["Luis Fernando Kalil Rosenburg de Castro", "luisdecastro@cartaodetodos.com"],
-    ["Marcela Reggiani Moraes", "marcelamoraes@cartaodetodos.com"],
-    ["Mariana de Albuquerque Lopes", "marianalopes@cartaodetodos.com"],
-    ["Matheus Arthur Fachin", "matheusfachin@cartaodetodos.com"],
-    ["Nubia Aquino", "nubiaaquino@cartaodetodos.com"],
-    ["Rennan Moura", "rennanmoura@cartaodetodos.com"],
-    ["Ricardo Estevão De Almeida", "ricardoalmeida@cartaodetodos.com"],
-    ["Rodney Duarte dos Santos", "rodneysantos@cartaodetodos.com"],
-    ["Ronaldo Bruno de Souza Santos", "ronaldosantos@cartaodetodos.com"],
-    ["Thiago da Silva Chisnandes", "thiagochisnandes@cartaodetodos.com"],
-    ["Ulisses Leandro Carvalho Ferreira", "ulissesferreira@cartaodetodos.com"],
-    ["Victor José Alves Fernandes", "victorfernandes@cartaodetodos.com"],
-    ["Vinicius Massullo Silva", "viniciussilva@cartaodetodos.com"],
-    ["Vinicius Miguel Pereira Cunha", "viniciuscunha@cartaodetodos.com"],
-    ["Wellyngton Alves Borges", "wellyngtonborges@cartaodetodos.com"],
-    ["Caroline Andrade Santos Bacelar", "carolinebacelar@cartaodetodos.com"],
-    ["Carine Santos", "carinesantos@cartaodetodos.com"],
-    ["Giovanna de Araujo Giacon", "giovannagiacon@cartaodetodos.com"],
-    ["Gustavo Aranda Dambroski", "gustavodambroski@cartaodetodos.com"],
-    ["Larissa Rodrigues", "larissarodrigues@cartaodetodos.com"],
-    ["Marcela Alves Silva Nepomuceno", "marcelanepomuceno@cartaodetodos.com"],
-    ["Mariana Ribeiro da Silva", "marianasilva@cartaodetodos.com"],
-    ["Raylan Nunes Barbosa", "raylanbarbosa@cartaodetodos.com"],
-    ["Samuel Nunes Rios Silva", "samuelsilva@cartaodetodos.com"],
-    ["Mateus Henrique Cavalcante", "mateuscavalcante@cartaodetodos.com"],
-    ["Sarah Nascimento Bicalho", "sarahbicalho@cartaodetodos.com"],
-    ["Renata Alvarenga da Silva Stocler", "renatastocler@cartaodetodos.com"]
-  ]
-    .map(([nome, email]) => ({ nome: nome.trim(), email: email.trim().toLowerCase() }))
-    .sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR", { sensitivity: "base" }));
-
-  const LIDER_POR_EMAIL = new Map(LIDERES.map((l) => [l.email, l]));
 
   /* ---------------------------------------------------------
      3. RELÓGIO — horário de Brasília independente do relógio do aparelho
@@ -171,10 +117,6 @@
     closedNotice: $("closed-notice"),
     closedTitle: $("closed-title"),
     closedText: $("closed-text"),
-    lider: $("lider"),
-    liderError: $("lider-error"),
-    emailDisplay: $("email-display"),
-    emailValue: $("email-value"),
     lista: $("duvidas-list"),
     duvidasError: $("duvidas-error"),
     addBtn: $("add-duvida"),
@@ -188,35 +130,7 @@
   };
 
   /* ---------------------------------------------------------
-     5. LISTA DE LÍDERES → SELECT
-     --------------------------------------------------------- */
-  function popularLideres() {
-    const frag = document.createDocumentFragment();
-    LIDERES.forEach((l) => {
-      const opt = document.createElement("option");
-      opt.value = l.email;
-      opt.textContent = l.nome;
-      frag.appendChild(opt);
-    });
-    el.lider.appendChild(frag);
-    atualizarEmail();
-  }
-
-  function atualizarEmail() {
-    const lider = LIDER_POR_EMAIL.get(el.lider.value);
-    el.lider.classList.toggle("is-placeholder", !lider);
-    if (lider) {
-      el.emailValue.textContent = lider.email;
-      el.emailDisplay.hidden = false;
-      limparErro(el.lider, el.liderError);
-    } else {
-      el.emailValue.textContent = "";
-      el.emailDisplay.hidden = true;
-    }
-  }
-
-  /* ---------------------------------------------------------
-     6. DÚVIDAS DINÂMICAS
+     5. DÚVIDAS DINÂMICAS
      --------------------------------------------------------- */
   let seqId = 0;
 
@@ -303,7 +217,7 @@
   }
 
   /* ---------------------------------------------------------
-     7. VALIDAÇÃO
+     6. VALIDAÇÃO
      --------------------------------------------------------- */
   function mostrarErro(campo, alvo, msg) {
     alvo.textContent = msg;
@@ -332,11 +246,6 @@
   function validar() {
     let primeiroInvalido = null;
 
-    if (!LIDER_POR_EMAIL.has(el.lider.value)) {
-      mostrarErro(el.lider, el.liderError, "Selecione seu nome na lista para continuar.");
-      primeiroInvalido = el.lider;
-    }
-
     if (coletarDuvidas().length === 0) {
       const primeira = el.lista.querySelector("textarea");
       mostrarErro(primeira, el.duvidasError, "Escreva pelo menos uma dúvida antes de enviar.");
@@ -353,20 +262,19 @@
   }
 
   /* ---------------------------------------------------------
-     8. PAYLOAD E ENVIO (integração real com o Power Automate)
+     7. PAYLOAD E ENVIO (integração real com o Power Automate)
      ---------------------------------------------------------
      Corpo do POST (exatamente estes campos):
      {
-       "idEnvio": "uuid",
+       "idEnvio": "uuid aleatório (só agrupa as dúvidas do mesmo envio; não identifica ninguém)",
        "dataHoraUTC": "2026-09-24T12:15:02.000Z",
-       "lider": "Nome",
-       "email": "email@empresa.com",
        "duvidas": ["Dúvida 1", "Dúvida 2"],
        "quantidadeDuvidas": 2,
        "origem": "HTML",
-       "versao": "1.1",
+       "versao": "2.0",
        "modoTeste": "No"
      }
+     Nenhum dado pessoal (nome, e-mail, matrícula, cargo, área, gestor) é coletado ou enviado.
      O envio só é concluído com HTTP 200 + JSON { "ok": true }.
   */
   let idEnvioAtual = null;       // id da tentativa pendente (reaproveitado só em reenvio idêntico após falha)
@@ -390,12 +298,11 @@
   }
 
   function montarPayload() {
-    const lider = LIDER_POR_EMAIL.get(el.lider.value);
     const duvidas = coletarDuvidas();
 
-    // Novo idEnvio a cada envio. Só é reaproveitado quando o líder reenvia exatamente o mesmo
-    // conteúdo após uma falha — assim o fluxo não grava em duplicidade se a 1ª tentativa chegou.
-    const assinatura = JSON.stringify([lider.email, duvidas]);
+    // Novo idEnvio (UUID aleatório) a cada envio. Só é reaproveitado quando a pessoa reenvia
+    // exatamente o mesmo conteúdo após uma falha — assim o fluxo não grava em duplicidade.
+    const assinatura = JSON.stringify(duvidas);
     if (!idEnvioAtual || assinatura !== assinaturaPendente) {
       idEnvioAtual = gerarId();
       assinaturaPendente = assinatura;
@@ -404,8 +311,6 @@
     return {
       idEnvio: idEnvioAtual,
       dataHoraUTC: new Date(Date.now() + offsetServidorMs).toISOString(), // horário real do envio
-      lider: lider.nome,
-      email: lider.email,
       duvidas: duvidas,
       quantidadeDuvidas: duvidas.length,
       origem: CONFIG.origem,
@@ -437,8 +342,14 @@
       clearTimeout(timer);
     }
 
-    if (resp.status === 403) throw new ErroEnvio("autorizacao", "HTTP 403");
-    if (resp.status !== 200) throw new ErroEnvio("http", "HTTP " + resp.status);
+    if (resp.status !== 200) {
+      // Registra no console (F12) o corpo do erro devolvido pelo Power Automate, para diagnóstico
+      let detalhe = "";
+      try { detalhe = (await resp.text()).slice(0, 1000); } catch (_) { /* sem corpo */ }
+      console.error("[Mudança de Sede] Power Automate respondeu HTTP " + resp.status + ":", detalhe);
+      if (resp.status === 403) throw new ErroEnvio("autorizacao", "HTTP 403");
+      throw new ErroEnvio("http", "HTTP " + resp.status);
+    }
 
     let corpo = null;
     try { corpo = JSON.parse(await resp.text()); } catch (_) { /* corpo não é JSON */ }
@@ -446,19 +357,13 @@
   }
 
   function mensagemDeErro(err) {
-    switch (err && err.tipo) {
-      case "autorizacao":
-        return "O formulário está encerrado ou o envio não foi autorizado. Suas dúvidas continuam preenchidas.";
-      case "timeout":
-        return "O envio não foi concluído: o servidor demorou para responder. Tente novamente. Suas dúvidas continuam preenchidas.";
-      case "rede":
-        return "O envio não foi concluído. Verifique sua conexão e tente novamente. Suas dúvidas continuam preenchidas.";
-      case "http":
-        return "O envio não foi concluído (" + err.message + "). Tente novamente. Suas dúvidas continuam preenchidas.";
-      default:
-        return "O envio não foi concluído. Tente novamente. Suas dúvidas continuam preenchidas.";
+    if (err && err.tipo === "autorizacao") {
+      // HTTP 403: o Power Automate recusou por prazo encerrado
+      return "Formulário encerrado. O prazo para envio das contribuições foi encerrado às 18h00 de 24/09/2026. Suas dúvidas continuam preenchidas.";
     }
+    return "O envio não foi concluído. Suas dúvidas continuam preenchidas.";
   }
+
 
   function setCarregando(sim) {
     enviando = sim;
@@ -507,7 +412,7 @@
   }
 
   function novoEnvio() {
-    resetarDuvidas();             // o nome selecionado é mantido para agilizar o próximo envio
+    resetarDuvidas();
     limparErroDuvidas();
     el.confirmation.hidden = true;
     el.form.hidden = false;
@@ -564,7 +469,6 @@
     el.closedText.textContent = texto;
     el.closedText.hidden = !texto;
     el.closedNotice.hidden = false;
-    el.lider.disabled = true;
     el.addBtn.disabled = true;
     el.submitBtn.disabled = true;
     // readonly (e não disabled) para que o texto já digitado continue legível e copiável
@@ -576,7 +480,6 @@
   function desbloquearFormulario() {
     el.formCard.classList.remove("is-locked");
     el.closedNotice.hidden = true;
-    el.lider.disabled = false;
     el.addBtn.disabled = false;
     el.submitBtn.disabled = false;
     el.lista.querySelectorAll("textarea").forEach((t) => { t.readOnly = false; });
@@ -608,11 +511,9 @@
   }
 
   async function init() {
-    popularLideres();
     resetarDuvidas();
     observer.observe(el.lista, { childList: true });
 
-    el.lider.addEventListener("change", atualizarEmail);
     el.addBtn.addEventListener("click", () => criarDuvida(true));
     el.form.addEventListener("submit", onSubmit);
     el.newSubmission.addEventListener("click", novoEnvio);
@@ -646,7 +547,6 @@
     // Exposto apenas para diagnóstico/testes no console
     window.__mudancaSede = {
       config: CONFIG,
-      lideres: LIDERES,
       fonteHorario: () => fonteHorario,
       agoraBrasilia: () => isoBrasilia(agora())
     };
